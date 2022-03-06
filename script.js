@@ -3,7 +3,7 @@ const container = document.getElementById("container")
 const resultCard = document.getElementById("result")
 const filterContainer = document.getElementById("filter-container")
 
-const categoriesData = ["%22category1%22","%22category2%22","%22category3%22"]
+const categoriesData = ["%22category1%22","%22category2%22","%22category3%22", "%22category4%22"]
 let results = []
 
 const getData = () => {
@@ -18,13 +18,20 @@ const getData = () => {
   };
 
 const printCategories = () => {
-    filterContainer.innerHTML = categoriesData.map((category,index ) => `
+    filterContainer.innerHTML = ` <div class="category" onclick="filterData(0)">All</div>`
+    filterContainer.innerHTML += categoriesData.map((category,index ) => `
     <div class="category" onclick="filterData(${index + 1})">category ${index + 1}</div>
     `).join("");
 }
 
 const filterData = (index) => {
-    let clonedResults = results.filter(({category}) => category === "category" + index)
+    let clonedResults = []
+if(index == 0){
+    clonedResults = results
+} else {
+    clonedResults = results.filter(({category}) => category === "category" + index)
+}
+ 
     clearData()
     printData(clonedResults)
 }
